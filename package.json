@@ -1,0 +1,25 @@
+{
+  "name": "journals.gg-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edwardfgt/journals.gg-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edwardfgt/journals.gg-backend/issues"
+  },
+  "homepage": "https://github.com/edwardfgt/journals.gg-backend#readme",
+  "dependencies": {
+    "aws-sdk": "^2.1371.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  }
+}
