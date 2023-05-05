@@ -17,7 +17,7 @@ router.post("/email", (req, res) => {
 
   const { email, message, subject } = req.body;
   console.log("extracted values are: " + email, message, subject);
-  sesTest(email, "mail@journals.gg", message, subject)
+  sesTest("mail@journals.gg", "ed@journals.gg", email, message, subject)
     .then((val) => {
       console.log("returned" + val);
       res.send("successful");
@@ -27,7 +27,7 @@ router.post("/email", (req, res) => {
     });
 });
 
-function sesTest(emailTo, emailFrom, message, subject) {
+function sesTest(emailTo, emailFrom, email, message, subject) {
   console.log("Input parameters:", emailTo, emailFrom, message, subject);
   const params = {
     Destination: {
@@ -36,11 +36,11 @@ function sesTest(emailTo, emailFrom, message, subject) {
     Message: {
       Body: {
         Text: {
-          Data: "From" + emailFrom + "\n" + message,
+          Data: "Sender: " + email + "\n" + "Message " + message,
         },
       },
       Subject: {
-        Data: `${subject}`,
+        Data: `CONTACT FORM: ${subject}`,
       },
     },
     Source: emailFrom,
