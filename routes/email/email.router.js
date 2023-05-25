@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 
-const router = express.Router();
+const emailRouter = express.Router();
 
 import aws from "aws-sdk";
 
@@ -12,7 +12,7 @@ const ses = new aws.SES({
   region: "us-east-1",
 });
 
-router.post("/email", (req, res) => {
+emailRouter.post("/email", (req, res) => {
   console.log("request.body is " + JSON.stringify(req.body));
 
   const { email, message, subject } = req.body;
@@ -48,4 +48,4 @@ function sesTest(emailTo, emailFrom, email, message, subject) {
   return ses.sendEmail(params).promise();
 }
 
-export default router;
+export default emailRouter;
