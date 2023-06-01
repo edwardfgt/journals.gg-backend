@@ -12,7 +12,7 @@ const ses = new aws.SES({
   region: "us-east-1",
 });
 
-emailRouter.post("/email", (req, res) => {
+emailRouter.post("/", (req, res) => {
   console.log("request.body is " + JSON.stringify(req.body));
 
   const { email, message, subject } = req.body;
