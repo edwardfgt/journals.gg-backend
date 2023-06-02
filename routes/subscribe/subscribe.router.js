@@ -5,10 +5,7 @@ dotenv.config();
 const subscribeRouter = express.Router();
 
 subscribeRouter.post("/", (req, res) => {
-  console.log("request body is " + JSON.stringify(req.body));
-
   const { email, pubID } = req.body;
-  console.log("extracted values are: " + email, pubID);
   subscribe(pubID, email)
     .then((response) => {
       if (response.ok) {
