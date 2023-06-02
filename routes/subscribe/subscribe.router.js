@@ -8,15 +8,21 @@ subscribeRouter.post("/", (req, res) => {
   const { email, pubID } = req.body;
   subscribe(pubID, email)
     .then((response) => {
-      if (response.ok) {
-        res.status(200).json({ message: "Successful" });
+      if (response.status === 200) {
+        res.status(201).json({ message: "Successful" });
+      } else if (response.status === 401) {
+        throw new Error("Unauthorized: Invalid API Key");
       } else {
         throw new Error(`Response failed with status: ${response.status}`);
       }
     })
     .catch((error) => {
       console.error(error);
-      res.status(500).json({ message: "Error: " + error.message });
+      if (error.message === "Unauthorized: Invalid API Key") {
+        res.status(401).json({ message: "Error: " + error.message });
+      } else {
+        res.status(500).json({ message: "Error: " + error.message });
+      }
     });
 });
 

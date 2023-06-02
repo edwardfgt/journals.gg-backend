@@ -13,10 +13,7 @@ const ses = new aws.SES({
 });
 
 emailRouter.post("/", (req, res) => {
-  console.log("request.body is " + JSON.stringify(req.body));
-
   const { email, message, subject } = req.body;
-  console.log("extracted values are: " + email, message, subject);
   sesTest("mail@journals.gg", "ed@journals.gg", email, message, subject)
     .then((val) => {
       console.log("returned" + val);
