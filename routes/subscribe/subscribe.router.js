@@ -4,6 +4,34 @@ dotenv.config();
 
 const subscribeRouter = express.Router();
 
+import {
+  SecretsManagerClient,
+  GetSecretValueCommand,
+} from "@aws-sdk/client-secrets-manager";
+
+const secret_name = "Beehiiv";
+
+const client = new SecretsManagerClient({
+  region: "us-east-1",
+});
+
+let response;
+
+try {
+  response = await client.send(
+    new GetSecretValueCommand({
+      SecretId: secret_name,
+      VersionStage: "AWSCURRENT",
+    })
+  );
+} catch (error) {
+  // For a list of exceptions thrown, see
+  // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+  throw error;
+}
+
+const secret = response.SecretString;
+
 subscribeRouter.post("/", (req, res) => {
   const { email, pubID } = req.body;
   subscribe(pubID, email)
@@ -27,7 +55,7 @@ subscribeRouter.post("/", (req, res) => {
 });
 
 function subscribe(pubID, email) {
-  const apiKey = process.env.BEEHIIV_SECRET_KEY;
+  const apiKey = secret;
   const url = `https://api.beehiiv.com/v2/publications/${pubID}/subscriptions`;
 
   const options = {
