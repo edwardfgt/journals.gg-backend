@@ -1,13 +1,13 @@
 import express from "express";
 import dotenv from "dotenv";
-dotenv.config();
-
-const subscribeRouter = express.Router();
-
 import {
   SecretsManagerClient,
   GetSecretValueCommand,
 } from "@aws-sdk/client-secrets-manager";
+
+dotenv.config();
+
+const subscribeRouter = express.Router();
 
 const secret_name = "Beehiiv";
 
@@ -25,8 +25,7 @@ try {
     })
   );
 } catch (error) {
-  // For a list of exceptions thrown, see
-  // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+  console.log(error);
   throw error;
 }
 

@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/edwardfgt/journals.gg-backend#readme",
   "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.345.0",
     "aws-sdk": "^2.1371.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
